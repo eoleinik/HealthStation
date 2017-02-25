@@ -1,0 +1,12 @@
+<div *ngFor="let sensor of sensors | async">
+
+  <!-- Point: 2 -->
+  <div class="col-md-4">
+    <div class="jumbotron text-center">
+      <p>{{ sensor.name }}</p>
+      <span *ngFor="let datum of data | async">
+        {{ datum.weight }},
+      </span>
+    </div>
+  </div>
+</div>
