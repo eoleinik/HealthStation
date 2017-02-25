@@ -2,11 +2,6 @@
 
   <!-- Point: 2 -->
   <div class="col-md-4">
-    <div class="jumbotron text-center">
-      <p>{{ sensor.name }}</p>
-      <span *ngFor="let datum of data | async">
-        {{ datum.weight }},
-      </span>
-    </div>
+      <sensor-graph [sensor]="sensor"></sensor-graph>
   </div>
 </div>

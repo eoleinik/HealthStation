@@ -1,3 +1,6 @@
-<p>
-  sensor-graph works!
-</p>
+<div class="sensor-graph jumbotron text-center" [style.border-color]="randomcolor" >
+  <h3>{{ sensor.name }}</h3>
+  <span *ngFor="let datum of data | async">
+    {{ datum[sensor.name] }},
+  </span>
+</div>

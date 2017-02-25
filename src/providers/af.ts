@@ -16,8 +16,8 @@ export class AF {
     return this.af.database.list('Users/'+'Bob'+'/sensors');
   }
 
-  getMeasurementsForUserAndSensor() {
-    return this.af.database.list('measurements/'+'Bob'+'/weight/', {
+  getMeasurementsForUserAndSensor(sensor: string) {
+    return this.af.database.list('measurements/'+'Bob/'+sensor, {
       query: {
         limitToLast: 10
       }
