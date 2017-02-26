@@ -9,6 +9,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AF } from "../providers/af";
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { SensorGraphComponent } from './sensor-graph/sensor-graph.component';
+import { BarchartComponent } from './shared/barchart/barchart.component';
+import { ChartsModule } from 'ng2-charts';
+import { LineChartComponent } from './shared/line-chart/line-chart.component';
 
 
 // Must export the config
@@ -24,13 +27,16 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     UserDashboardComponent,
-    SensorGraphComponent
+    SensorGraphComponent,
+    BarchartComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    ChartsModule
   ],
   providers: [ AF ],
   bootstrap: [AppComponent]
