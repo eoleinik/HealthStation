@@ -3,38 +3,30 @@ import {AngularFire, AuthProviders, AuthMethods, FirebaseListObservable} from 'a
 
 @Injectable()
 export class AF {
-  public messages: FirebaseListObservable<any>;
-  public users: FirebaseListObservable<any>;
-  public displayName: string;
-  public email: string;
+
+  selectedPatient;
 
   constructor(public af: AngularFire) {
-    this.messages = this.af.database.list('messages');
   }
 
-  getSensors() {
-    return this.af.database.list('Users/'+'Bob'+'/sensors');
+  getSensors(userKey: string) {
+    return this.af.database.list('Users/'+userKey+'/sensors');
   }
 
-  getMeasurementsForUserAndSensor(sensor: string) {
-    return this.af.database.list('measurements/'+'Bob/'+sensor, {
+  getMeasurementsForUserAndSensor(userKey: string, sensor: string) {
+    return this.af.database.list('measurements/'+userKey+'/'+sensor, {
       query: {
-        limitToLast: 10
+        limitToLast: 20
       }
     });
   }
 
-  /**
-   * Saves a message to the Firebase Realtime Database
-   * @param text
-   */
-  sendMessage(text) {
-    var message = {
-      message: text,
-      displayName: this.displayName,
-      email: this.email,
-      timestamp: Date.now()
-    };
-    this.messages.push(message);
+  getPatients() {
+    return this.af.database.list('Users/');
   }
+
+  getPatient(userKey: string) {
+    return this.af.database.object('Users/'+userKey);
+  }
+
 }

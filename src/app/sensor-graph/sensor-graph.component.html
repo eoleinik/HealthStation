@@ -1,8 +1,12 @@
-<div class="sensor-graph jumbotron text-center" [style.border-color]="randomcolor" >
-  <h3>{{ sensor.name }}</h3>
-  <span *ngFor="let datum of data | async">
-    {{ datum[sensor.name] }},
-  </span>
-  <!--<barchart [data]="[[0, 10],[1, 30], [2, 40], [3, 19]]"></barchart>-->
-  <line-chart [lineChartData]="[{data: [65, 59, 80, 81, 56, 55, 40]}]"></line-chart>
+<!--<div class="sensor-graph jumbotron text-center" [style.border-color]="randomcolor" >-->
+  <!---->
+<!--</div>-->
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3>{{ sensor.name | capitalize }}</h3>
+    <!--<barchart [data]="[[0, 10],[1, 30], [2, 40], [3, 19]]"></barchart>-->
+    <line-chart [lineChartLabels]="labels"  [lineChartData]="[{data: data}]"></line-chart>
+  </div>
 </div>

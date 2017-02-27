@@ -1,0 +1,29 @@
+#name-highlight {
+  border-radius: 7px;
+  border: 2px solid;
+  white-space:nowrap;
+  background-color: rgba(52,152,219,0.3);
+  border-color: rgba(52,152,219,1.0);
+}
+
+#add-new-sensor {
+  padding: 10px;
+  height: 130px;
+  border-radius: 30px;
+  border: 7px dashed lightgray;
+}
+
+#add-new-sensor-content {
+  color: gray;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#add-new-sensor-content:hover {
+  color: black;
+}
+
+.glyphicon {
+  font-size: 40px;
+}

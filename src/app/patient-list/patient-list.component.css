@@ -1,0 +1,7 @@
+thead {
+  font-weight: bold;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}

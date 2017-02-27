@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from "@angular/router";
 
 import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
@@ -12,6 +13,9 @@ import { SensorGraphComponent } from './sensor-graph/sensor-graph.component';
 import { BarchartComponent } from './shared/barchart/barchart.component';
 import { ChartsModule } from 'ng2-charts';
 import { LineChartComponent } from './shared/line-chart/line-chart.component';
+import { PatientListComponent } from './patient-list/patient-list.component';
+import {DatePipe} from "@angular/common";
+import {CapitalizePipe} from "../pipes/capitalize.pipe";
 
 
 // Must export the config
@@ -23,22 +27,31 @@ export const firebaseConfig = {
   messagingSenderId: "848081157972"
 };
 
+const routes: Routes = [
+  { path: '', redirectTo: 'choose-patient', pathMatch: 'full' },
+  { path: 'choose-patient', component: PatientListComponent},
+  { path: 'patient-details/:id', component: UserDashboardComponent}
+];
+
 @NgModule({
   declarations: [
     AppComponent,
     UserDashboardComponent,
     SensorGraphComponent,
     BarchartComponent,
-    LineChartComponent
+    LineChartComponent,
+    PatientListComponent,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig),
     ChartsModule
   ],
-  providers: [ AF ],
+  providers: [ AF, DatePipe ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

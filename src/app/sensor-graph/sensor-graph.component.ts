@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AF } from "../../providers/af";
+import {DatePipe} from "@angular/common";
+
 
 import { FirebaseListObservable, FirebaseObjectObservable } from "angularfire2";
 
@@ -7,32 +9,37 @@ import { FirebaseListObservable, FirebaseObjectObservable } from "angularfire2";
 @Component({
   selector: 'sensor-graph',
   templateUrl: './sensor-graph.component.html',
-  styleUrls: ['./sensor-graph.component.css']
+  styleUrls: ['./sensor-graph.component.css'],
 })
 export class SensorGraphComponent implements OnInit {
 
   @Input()
   sensor;
 
-  data: FirebaseListObservable<any>;
+  @Input()
+  userKey: string;
 
-  //set a property that holds a random color for our style.
-  randomcolor = this.getRandomColor();
+  rawData: FirebaseListObservable<any>;
+  data = [];
+  labels = [];
 
-  //function to get random colors
-  public getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++){
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
-  constructor(public afService: AF) { }
+  constructor(public afService: AF, public datepipe: DatePipe) { }
 
   ngOnInit() {
-    this.data = this.afService.getMeasurementsForUserAndSensor(this.sensor.name);
+    this.rawData = this.afService.getMeasurementsForUserAndSensor(this.userKey, this.sensor.name);
+
+    this.rawData.subscribe(snapshots => {
+      this.data = [];
+      this.labels = [];
+      snapshots.forEach(snapshot => {
+        this.data.push(snapshot[this.sensor.name]);
+        let date = new Date(snapshot.timestamp);
+        let formatted = this.datepipe.transform(date, 'MMM dd');
+        this.labels.push(formatted);
+      });
+
+      console.log(this.labels);
+    });
   }
 
 }

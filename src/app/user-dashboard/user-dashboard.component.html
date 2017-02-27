@@ -1,6 +1,22 @@
-<div *ngFor="let sensor of sensors | async">
+<div class="container">
+  <h2>Dashboard for <span id="name-highlight">{{ (patient | async)?.firstName }} {{ (patient | async)?.lastName }}</span></h2>
+  <ng-container *ngFor="let sensor of sensors | async; let i = index">
+    <div *ngIf="i%3==0" class="clearfix"></div>
 
-  <div class="col-md-4">
-      <sensor-graph [sensor]="sensor"></sensor-graph>
+    <div class="col-md-4"  >
+      <sensor-graph [userKey]="key" [sensor]="sensor"></sensor-graph>
+    </div>
+
+  </ng-container>
+
+
+  <div id="add-new-sensor" class="col-md-4">
+    <div id="add-new-sensor-content" class="text-center">
+      <span class="glyphicon glyphicon-plus"></span>
+      <p class="lead">Add new sensor</p>
+    </div>
+
   </div>
+
+
 </div>
