@@ -48,10 +48,6 @@ export class LineChartComponent implements OnInit {
     this.lineChartData = _lineChartData;
   }
 
-  public containsData(data: Array<any>) {
-    return data.some(series => series.data.length != 0);
-  }
-
   // events
   public chartClicked(e:any):void {
     console.log(e);

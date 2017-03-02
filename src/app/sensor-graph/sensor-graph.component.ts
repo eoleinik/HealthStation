@@ -25,6 +25,10 @@ export class SensorGraphComponent implements OnInit {
 
   constructor(public afService: AF, public datepipe: DatePipe) { }
 
+  public containsData() {
+    return this.data.length > 0; //some(series => series.data.length != 0);
+  }
+
   ngOnInit() {
     this.rawData = this.afService.getMeasurementsForUserAndSensor(this.userKey, this.sensor.name);
 
@@ -32,6 +36,7 @@ export class SensorGraphComponent implements OnInit {
       this.data = [];
       this.labels = [];
       snapshots.forEach(snapshot => {
+
         this.data.push(snapshot[this.sensor.name]);
         let date = new Date(snapshot.timestamp);
         let formatted = this.datepipe.transform(date, 'MMM dd');

@@ -6,7 +6,15 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <h3>{{ sensor.name | capitalize }}</h3>
-    <!--<barchart [data]="[[0, 10],[1, 30], [2, 40], [3, 19]]"></barchart>-->
-    <line-chart [lineChartLabels]="labels"  [lineChartData]="[{data: data}]"></line-chart>
+
+    <ng-container *ngIf="containsData()">
+      <!--<barchart [data]="[[0, 10],[1, 30], [2, 40], [3, 19]]"></barchart>-->
+      <line-chart [lineChartLabels]="labels"  [lineChartData]="[{data: data}]"></line-chart>
+      <!--<indicator [chartData]="data"></indicator>-->
+    </ng-container>
+
+    <div *ngIf="!containsData()" id="chart-replacement" class="text-center">
+      <p class="lead">No data... yet</p>
+    </div>
   </div>
 </div>

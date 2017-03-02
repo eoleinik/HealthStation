@@ -1,0 +1,7 @@
+<div class=" text-center">
+  <span class="measurement-value">
+    {{ chartData[chartData.length-1] }}
+  </span>
+  <span *ngIf="isIncreasing()" class="glyphicon glyphicon-triangle-top green arrow"></span>
+  <span *ngIf="isDecreasing()" class="glyphicon glyphicon-triangle-bottom red arrow"></span>
+</div>

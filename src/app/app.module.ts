@@ -17,6 +17,7 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import {DatePipe} from "@angular/common";
 import {CapitalizePipe} from "../pipes/capitalize.pipe";
 import { NewSensorComponent } from './new-sensor/new-sensor.component';
+import { IndicatorComponent } from './shared/indicator/indicator.component';
 
 
 // Must export the config
@@ -44,7 +45,8 @@ const routes: Routes = [
     LineChartComponent,
     PatientListComponent,
     CapitalizePipe,
-    NewSensorComponent
+    NewSensorComponent,
+    IndicatorComponent
   ],
   imports: [
     BrowserModule,

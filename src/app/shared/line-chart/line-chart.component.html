@@ -1,5 +1,5 @@
 <div class="row">
-    <div *ngIf="containsData(lineChartData)" style="display: block; padding: 20px; padding-right: 30px;">
+    <div style="display: block; padding: 20px; padding-right: 30px;">
       <canvas baseChart width="400" height="200"
               [datasets]="lineChartData"
               [labels]="lineChartLabels"
@@ -10,8 +10,6 @@
               (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)"></canvas>
     </div>
-    <div *ngIf="!containsData(lineChartData)" id="chart-replacement" class="text-center">
-      <p class="lead">No data... yet</p>
-    </div>
+
 </div>
 
