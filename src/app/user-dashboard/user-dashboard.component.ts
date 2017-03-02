@@ -26,7 +26,7 @@ export class UserDashboardComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.key = params['id'];
       this.patient = this.afService.getPatient(this.key);
-      this.sensors = this.afService.getSensors(this.key);
+      this.sensors = this.afService.getSensorsForPatient(this.key);
     });
 
   }

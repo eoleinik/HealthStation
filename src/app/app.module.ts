@@ -16,6 +16,7 @@ import { LineChartComponent } from './shared/line-chart/line-chart.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
 import {DatePipe} from "@angular/common";
 import {CapitalizePipe} from "../pipes/capitalize.pipe";
+import { NewSensorComponent } from './new-sensor/new-sensor.component';
 
 
 // Must export the config
@@ -30,7 +31,8 @@ export const firebaseConfig = {
 const routes: Routes = [
   { path: '', redirectTo: 'choose-patient', pathMatch: 'full' },
   { path: 'choose-patient', component: PatientListComponent},
-  { path: 'patient-details/:id', component: UserDashboardComponent}
+  { path: 'patient-details/:id', component: UserDashboardComponent},
+  { path: 'add-sensor', component: NewSensorComponent}
 ];
 
 @NgModule({
@@ -41,7 +43,8 @@ const routes: Routes = [
     BarchartComponent,
     LineChartComponent,
     PatientListComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    NewSensorComponent
   ],
   imports: [
     BrowserModule,

@@ -5,12 +5,18 @@ import {AngularFire, AuthProviders, AuthMethods, FirebaseListObservable} from 'a
 export class AF {
 
   selectedPatient;
+  sensors: FirebaseListObservable<any>;
 
   constructor(public af: AngularFire) {
+    this.sensors = this.getSensors()
   }
 
-  getSensors(userKey: string) {
+  getSensorsForPatient(userKey: string) {
     return this.af.database.list('Users/'+userKey+'/sensors');
+  }
+
+  getSensors() {
+    return this.af.database.list('sensors/');
   }
 
   getMeasurementsForUserAndSensor(userKey: string, sensor: string) {
@@ -27,6 +33,10 @@ export class AF {
 
   getPatient(userKey: string) {
     return this.af.database.object('Users/'+userKey);
+  }
+
+  addSensorForPatient(userKey: string, sensor: any) {
+    this.getSensorsForPatient(userKey).push({name: sensor});
   }
 
 }
