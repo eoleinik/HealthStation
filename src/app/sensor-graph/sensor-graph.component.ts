@@ -30,6 +30,7 @@ export class SensorGraphComponent implements OnInit {
   configObj: Observable<any>;
   data = [{data: []}];
   labels = [];
+  units = "";
 
   public showLegend = [false];
 
@@ -80,6 +81,7 @@ export class SensorGraphComponent implements OnInit {
             } else {
               this.labels = this.labels.splice(0);
             }
+            this.units = seriesName.Unit;
             let tempDict = {data: measurements, label: seriesName.Type};
             this.data.push(tempDict);
           });

@@ -7,7 +7,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let date of chartDates.slice((chartDates.length>5)?chartDates.length-5:0); let i = index">
+    <tr *ngFor="let date of chartDates.slice((chartDates.length>5)?chartDates.length-5:0).reverse(); let i = index">
       <td>{{ date }}</td>
       <td *ngFor="let series of chartData">{{ series.data[i] }}</td>
     </tr>
