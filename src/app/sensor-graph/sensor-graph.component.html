@@ -12,6 +12,7 @@
       <line-chart *ngIf="(configObj | async)?.ChartKey == 'LineGraph'" [lineChartLabels]="labels"  [lineChartData]="data" [showLegend]="false"  ></line-chart>
       <line-chart *ngIf="(configObj | async)?.ChartKey == 'MultiLineGraph'" [lineChartLabels]="labels"  [lineChartData]="data" [showLegend]="true"  ></line-chart>
       <indicator *ngIf="(configObj | async)?.ChartKey == 'Indicator'" [chartData]="data[0].data"></indicator>
+      <table-chart *ngIf="(configObj | async)?.ChartKey == 'TableChart'" [chartData]="data" [chartDates]="labels"></table-chart>
     </ng-container>
 
     <div *ngIf="!containsData()" id="chart-replacement" class="text-center">

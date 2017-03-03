@@ -1,16 +1,12 @@
 <div class="container">
-  <h2>Dashboard for <span id="name-highlight">{{ (patient | async)?.FirstName }} {{ (patient | async)?.SecondName }}</span></h2>
+  <h1>Dashboard for <span id="name-highlight">{{ (patient | async)?.FirstName }} {{ (patient | async)?.SecondName }}</span></h1>
+
   <ng-container *ngFor="let config of configs | async; let i = index">
-
-
     <div class="col-md-4">
       <sensor-graph [userKey]="key" [configKey]="config.ConfigKey"></sensor-graph>
     </div>
-
     <div *ngIf="i%3==2" class="clearfix"></div>
-
   </ng-container>
-
 
   <div id="add-new-sensor" class="col-md-4">
     <div routerLink="/add-sensor" id="add-new-sensor-content" class="text-center">
@@ -19,6 +15,5 @@
     </div>
 
   </div>
-
 
 </div>

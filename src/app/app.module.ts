@@ -18,6 +18,7 @@ import {DatePipe} from "@angular/common";
 import {CapitalizePipe} from "../pipes/capitalize.pipe";
 import { NewSensorComponent } from './new-sensor/new-sensor.component';
 import { IndicatorComponent } from './shared/indicator/indicator.component';
+import { TableChartComponent } from './shared/table-chart/table-chart.component';
 
 
 // Must export the configKey
@@ -33,7 +34,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'choose-patient', pathMatch: 'full' },
   { path: 'choose-patient', component: PatientListComponent},
   { path: 'patient-details/:id', component: UserDashboardComponent},
-  { path: 'add-configKey', component: NewSensorComponent}
+  { path: 'add-sensor', component: NewSensorComponent}
 ];
 
 @NgModule({
@@ -46,7 +47,8 @@ const routes: Routes = [
     PatientListComponent,
     CapitalizePipe,
     NewSensorComponent,
-    IndicatorComponent
+    IndicatorComponent,
+    TableChartComponent
   ],
   imports: [
     BrowserModule,

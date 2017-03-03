@@ -37,7 +37,7 @@ export class SensorGraphComponent implements OnInit {
   }
 
   public containsData() {
-    return this.data.some(series => series.data.length != 0); //some(series => series.data.length != 0);
+    return this.data.length > 0 && this.data.some(series => series.data.length != 0); //some(series => series.data.length != 0);
   }
 
   ngOnInit() {
@@ -70,7 +70,7 @@ export class SensorGraphComponent implements OnInit {
             let measurements = [];
             let new_labels = [];
             let measKeys = Object.keys(selected);
-            measKeys.filter(key => key != "$key").slice(measKeys.length-20,).forEach(measKey => {
+            measKeys.filter(key => key != "$key").slice((measKeys.length>20)?measKeys.length-20:0).forEach(measKey => {
               measurements.push(selected[measKey].Value);
               let date = new Date(selected[measKey].Time);
               new_labels.push(this.datepipe.transform(date, 'MMM dd'));

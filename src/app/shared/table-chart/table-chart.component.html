@@ -1,0 +1,17 @@
+<div class="text-center">
+  <table class="table table-responsive table-condensed table-striped">
+    <thead>
+    <tr>
+      <td>Date</td>
+      <td *ngFor="let series of chartData">{{ series.label }}</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let date of chartDates.slice((chartDates.length>5)?chartDates.length-5:0); let i = index">
+      <td>{{ date }}</td>
+      <td *ngFor="let series of chartData">{{ series.data[i] }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
