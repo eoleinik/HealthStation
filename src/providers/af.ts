@@ -4,23 +4,23 @@ import {AngularFire, AuthProviders, AuthMethods, FirebaseListObservable} from 'a
 @Injectable()
 export class AF {
 
-  selectedPatient;
-  sensors: FirebaseListObservable<any>;
-
   constructor(public af: AngularFire) {
-    this.sensors = this.getSensors()
   }
 
-  getSensorsForPatient(userKey: string) {
-    return this.af.database.list('Users/'+userKey+'/sensors');
+  getConfigsForPatient(userKey: string) {
+    return this.af.database.list('UsersF/'+userKey+'/Configurations');
   }
 
-  getSensors() {
-    return this.af.database.list('sensors/');
+  getConfig(configKey: string) {
+    return this.af.database.object('SensorConfigs/'+configKey);
   }
 
-  getMeasurementsForUserAndSensor(userKey: string, sensor: string) {
-    return this.af.database.list('measurements/'+userKey+'/'+sensor, {
+  getMeasurementsForUserAndSensor(userKey: string, sensorKey: string) {
+    return this.af.database.list('MeasurementsF/'+userKey+'/'+sensorKey);
+  }
+
+  getMeasurementsForUserAndSensorAndSeries(userKey: string, sensorKey: string, seriesKey: string) {
+    return this.af.database.list('MeasurementsF/'+userKey+'/'+sensorKey+'/'+seriesKey, {
       query: {
         limitToLast: 20
       }
@@ -28,15 +28,19 @@ export class AF {
   }
 
   getPatients() {
-    return this.af.database.list('Users/');
+    return this.af.database.list('UsersF/');
   }
 
   getPatient(userKey: string) {
-    return this.af.database.object('Users/'+userKey);
+    return this.af.database.object('UsersF/'+userKey);
   }
 
-  addSensorForPatient(userKey: string, sensor: any) {
-    this.getSensorsForPatient(userKey).push({name: sensor});
+  addConfigForPatient(userKey: string, configKey: string) {
+    this.getConfigsForPatient(userKey).push({name: configKey});
+  }
+
+  getSeriesName(sensorKey: string, seriesKey: string) {
+    return this.af.database.object('SensorsF/'+sensorKey+'/Series/'+seriesKey);
   }
 
 }

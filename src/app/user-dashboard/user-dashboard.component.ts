@@ -12,7 +12,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class UserDashboardComponent implements OnInit {
 
-  public sensors: FirebaseListObservable<any>;
+  public configs: FirebaseListObservable<any>;
   public patient: FirebaseObjectObservable<any>;
   key: string;
 
@@ -26,7 +26,7 @@ export class UserDashboardComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.key = params['id'];
       this.patient = this.afService.getPatient(this.key);
-      this.sensors = this.afService.getSensorsForPatient(this.key);
+      this.configs = this.afService.getConfigsForPatient(this.key);
     });
 
   }

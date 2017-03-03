@@ -8,12 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class LineChartComponent implements OnInit {
 
   @Input()
-  public lineChartData:Array<any>;
+  public lineChartData:Array<any> = [{data: []}];
 
   @Input()
   public lineChartLabels:Array<any>;
 
+  @Input()
+  public showLegend;
+
   constructor() { }
+
+  chart;
 
   ngOnInit() {
   }
@@ -22,9 +27,10 @@ export class LineChartComponent implements OnInit {
     responsive: true,
     maintainAspectRatio: true
   };
+
   public lineChartColors:Array<any> = [
 
-    { // dark grey
+    {
       backgroundColor: 'rgba(50,205,50, 0.2)',
       borderColor: 'rgba(50,205,50,1)',
       pointBackgroundColor: 'rgba(50,205,50,1)',
@@ -33,8 +39,17 @@ export class LineChartComponent implements OnInit {
       pointHoverBorderColor: 'rgba(50,205,50,1)'
     },
 
+    {
+      backgroundColor: 'rgba(192, 57, 43, 0.2)',
+      borderColor: 'rgba(192, 57, 43,1.0)',
+      pointBackgroundColor: 'rgba(192, 57, 43,1.0)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(192, 57, 43,1.0)'
+    },
+
   ];
-  public lineChartLegend:boolean = false;
+
   public lineChartType:string = 'line';
 
   public randomize():void {
@@ -50,12 +65,13 @@ export class LineChartComponent implements OnInit {
 
   // events
   public chartClicked(e:any):void {
-    console.log(e);
+    // console.log(e);
+
     // this.randomize();
   }
 
   public chartHovered(e:any):void {
-    console.log(e);
+    // console.log(e);
   }
 
 }

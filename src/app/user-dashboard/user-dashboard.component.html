@@ -1,11 +1,13 @@
 <div class="container">
-  <h2>Dashboard for <span id="name-highlight">{{ (patient | async)?.firstName }} {{ (patient | async)?.lastName }}</span></h2>
-  <ng-container *ngFor="let sensor of sensors | async; let i = index">
-    <div *ngIf="i%3==0" class="clearfix"></div>
+  <h2>Dashboard for <span id="name-highlight">{{ (patient | async)?.FirstName }} {{ (patient | async)?.SecondName }}</span></h2>
+  <ng-container *ngFor="let config of configs | async; let i = index">
 
-    <div class="col-md-4"  >
-      <sensor-graph [userKey]="key" [sensor]="sensor"></sensor-graph>
+
+    <div class="col-md-4">
+      <sensor-graph [userKey]="key" [configKey]="config.ConfigKey"></sensor-graph>
     </div>
+
+    <div *ngIf="i%3==2" class="clearfix"></div>
 
   </ng-container>
 

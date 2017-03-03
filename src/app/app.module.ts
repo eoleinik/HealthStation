@@ -20,7 +20,7 @@ import { NewSensorComponent } from './new-sensor/new-sensor.component';
 import { IndicatorComponent } from './shared/indicator/indicator.component';
 
 
-// Must export the config
+// Must export the configKey
 export const firebaseConfig = {
   apiKey: "AIzaSyCi0NPiuB2kLpQRT5mggyZprxhFfuvr3xo",
   authDomain: "ee5dashboard.firebaseapp.com",
@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'choose-patient', pathMatch: 'full' },
   { path: 'choose-patient', component: PatientListComponent},
   { path: 'patient-details/:id', component: UserDashboardComponent},
-  { path: 'add-sensor', component: NewSensorComponent}
+  { path: 'add-configKey', component: NewSensorComponent}
 ];
 
 @NgModule({

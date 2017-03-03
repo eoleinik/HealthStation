@@ -13,11 +13,17 @@ export class IndicatorComponent implements OnInit {
   constructor() { }
 
   isIncreasing() {
-    return this.chartData.length >= 2 && this.chartData[this.chartData.length - 1]-this.chartData[this.chartData.length - 2] >= 0;
+    return this.chartData.length >= 2 &&
+      this.chartData[this.chartData.length - 1]-this.chartData[this.chartData.length - 2] >= 0;
   }
 
   isDecreasing() {
-    return this.chartData.length >= 2 && this.chartData[this.chartData.length - 1]-this.chartData[this.chartData.length - 2] < 0;
+    return this.chartData.length >= 2 &&
+      this.chartData[this.chartData.length - 1]-this.chartData[this.chartData.length - 2] < 0;
+  }
+
+  extractData() {
+    return this.chartData[this.chartData.length-1];
   }
 
   ngOnInit() {
