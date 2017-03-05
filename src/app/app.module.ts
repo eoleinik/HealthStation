@@ -19,6 +19,7 @@ import {CapitalizePipe} from "../pipes/capitalize.pipe";
 import { NewSensorComponent } from './new-sensor/new-sensor.component';
 import { IndicatorComponent } from './shared/indicator/indicator.component';
 import { TableChartComponent } from './shared/table-chart/table-chart.component';
+import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
 
 
 // Must export the configKey
@@ -48,7 +49,8 @@ const routes: Routes = [
     CapitalizePipe,
     NewSensorComponent,
     IndicatorComponent,
-    TableChartComponent
+    TableChartComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,

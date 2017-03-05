@@ -1,0 +1,9 @@
+<div style="display: block">
+  <canvas baseChart width="400" height="250"
+          [data]="extractData()"
+          [labels]="extractLabels()"
+          [chartType]="doughnutChartType"
+          [options]="chartOptions"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>
