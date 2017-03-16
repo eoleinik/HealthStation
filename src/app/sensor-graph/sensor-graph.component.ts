@@ -1,4 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component, OnInit, Input,
+  trigger,
+  state,
+  style,
+  transition,
+  animate, ChangeDetectorRef
+} from '@angular/core';
 import { AF } from "../../providers/af";
 import {DatePipe} from "@angular/common";
 
@@ -10,15 +17,25 @@ import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/filter';
 
 
-
-import { FirebaseListObservable, FirebaseObjectObservable } from "angularfire2";
-
-
 @Component({
   selector: 'sensor-graph',
   templateUrl: './sensor-graph.component.html',
   styleUrls: ['./sensor-graph.component.css'],
+  animations: [
+    trigger('state', [
+      state('inactive', style({
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+
+      })),
+      state('active',   style({
+        backgroundColor: 'green',
+      })),
+      transition('inactive => active', animate('20ms ease')),
+      transition('active => inactive', animate('1000ms 500ms ease'))
+    ])
+  ]
 })
+
 export class SensorGraphComponent implements OnInit {
 
   @Input()
@@ -32,9 +49,18 @@ export class SensorGraphComponent implements OnInit {
   labels = [];
   units = "";
 
-  public showLegend = [false];
+  public STATE = "inactive";
 
-  constructor(public afService: AF, public datepipe: DatePipe) {
+  public animationDone($event) {
+    if (this.STATE == 'active') {
+      this.STATE = 'inactive';
+      this.cdr.detectChanges();
+    } else {
+      // do nothing
+    }
+  }
+
+  constructor(public afService: AF, public datepipe: DatePipe, private cdr: ChangeDetectorRef) {
   }
 
   public containsData() {
@@ -62,7 +88,8 @@ export class SensorGraphComponent implements OnInit {
     // });
 
     this.configObj.subscribe(configObj => {
-      this.afService.getMeasurementsForUserAndSensor(this.userKey, configObj.SensorKey).subscribe(allTypes => {
+      let measurementsObservable = this.afService.getMeasurementsForUserAndSensor(this.userKey, configObj.SensorKey);
+      measurementsObservable.subscribe(allTypes => {
         this.data = [];
         this.labels = [];
         Object.keys(configObj.TimeSeries).forEach(type => {
@@ -86,7 +113,14 @@ export class SensorGraphComponent implements OnInit {
             this.data.push(tempDict);
           });
         });
-      })
+      });
+
+      measurementsObservable.$ref.on('child_changed', data => {
+        console.log("lol"+this.STATE);
+          this.STATE = 'active';
+          this.cdr.detectChanges();
+      });
+
     });
 
     // let measurements = this.configObj.map(configuration => {

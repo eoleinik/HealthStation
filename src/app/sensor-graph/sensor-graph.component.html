@@ -8,7 +8,7 @@
     <h3>
       {{ (configObj | async)?.Name | capitalize }}
       <small>| {{units}}</small>
-      <!--<span class="label label-default">{{units}}</span>-->
+      <span class="label label-default" [@state]="STATE" (@state.done)="animationDone($event)">NEW</span>
     </h3>
 
     <ng-container *ngIf="containsData()">
