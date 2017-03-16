@@ -8,7 +8,7 @@
           <td>#</td>
           <td>First name</td>
           <td>Last name</td>
-          <td>Number</td>
+          <td>Birth date</td>
           <td>Dashboard</td>
         </tr>
       </thead>
@@ -17,7 +17,7 @@
           <td><b>{{ i+1 }}</b></td>
           <td>{{ patient.FirstName }}</td>
           <td>{{ patient.SecondName }}</td>
-          <td>{{ patient.$key }}</td>
+          <td>{{ patient.BirthDate | date:'mediumDate'}}</td>
           <td>
             <button [routerLink]="['/patient-details', patient.$key]" class="btn btn-sm btn-default">See dashboard</button>
           </td>

@@ -1,0 +1,9 @@
+<div *ngIf="!userKey" class="container">
+  <div  class="jumbotron text-center">
+    <h2>Please place your card on the scanner</h2>
+    <br>
+    <img src="assets/img/tagging.gif">
+  </div>
+</div>
+
+<user-dashboard *ngIf="userKey" [key]="userKey"></user-dashboard>

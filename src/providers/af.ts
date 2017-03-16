@@ -43,4 +43,8 @@ export class AF {
     return this.af.database.object('SensorsF/'+sensorKey+'/Series/'+seriesKey);
   }
 
+  getLastTaggedUser() {
+    return this.af.database.object('Tags/LastTaggedUser');
+  }
+
 }

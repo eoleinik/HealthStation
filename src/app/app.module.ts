@@ -20,6 +20,7 @@ import { NewSensorComponent } from './new-sensor/new-sensor.component';
 import { IndicatorComponent } from './shared/indicator/indicator.component';
 import { TableChartComponent } from './shared/table-chart/table-chart.component';
 import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
+import { LiveViewComponent } from './live-view/live-view.component';
 
 
 // Must export the configKey
@@ -34,6 +35,7 @@ export const firebaseConfig = {
 const routes: Routes = [
   { path: '', redirectTo: 'choose-patient', pathMatch: 'full' },
   { path: 'choose-patient', component: PatientListComponent},
+  { path: 'live', component: LiveViewComponent},
   { path: 'patient-details/:id', component: UserDashboardComponent},
   { path: 'add-sensor', component: NewSensorComponent}
 ];
@@ -50,7 +52,8 @@ const routes: Routes = [
     NewSensorComponent,
     IndicatorComponent,
     TableChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    LiveViewComponent
   ],
   imports: [
     BrowserModule,

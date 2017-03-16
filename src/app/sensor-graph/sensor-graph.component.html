@@ -12,7 +12,6 @@
     </h3>
 
     <ng-container *ngIf="containsData()">
-      <!--<barchart [data]="[[0, 10],[1, 30], [2, 40], [3, 19]]"></barchart>-->
       <line-chart *ngIf="(configObj | async)?.ChartKey == 'LineGraph'" [lineChartLabels]="labels"  [lineChartData]="data" [showLegend]="false"  ></line-chart>
       <line-chart *ngIf="(configObj | async)?.ChartKey == 'MultiLineGraph'" [lineChartLabels]="labels"  [lineChartData]="data" [showLegend]="true"  ></line-chart>
       <indicator *ngIf="(configObj | async)?.ChartKey == 'Indicator'" [chartData]="data[0].data"></indicator>
