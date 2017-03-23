@@ -13,6 +13,10 @@ export class PatientRegistrationComponent implements OnInit {
 
   constructor(public afService: AF) { }
 
+  registerPatient() {
+    this.afService.registerUser(this.id, "Pikachu", "Yo", "Male", 21312312434, 123);
+  }
+
   ngOnInit() {
 
   }

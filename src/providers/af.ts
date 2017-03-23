@@ -36,7 +36,7 @@ export class AF {
   }
 
   addConfigForPatient(userKey: string, configKey: string) {
-    this.getConfigsForPatient(userKey).push({name: configKey});
+    return this.getConfigsForPatient(userKey).push({name: configKey});
   }
 
   getSeriesName(sensorKey: string, seriesKey: string) {
@@ -45,6 +45,16 @@ export class AF {
 
   getLastTaggedUser() {
     return this.af.database.object('Tags/');
+  }
+
+  registerUser(id: string, firstName: string, secondName: string, sex: string, dob: number, height: number) {
+    return this.getPatients().update(id, {
+      FirstName: firstName,
+      SecondName: secondName,
+      BirthDate: dob,
+      Sex: sex,
+      Height: height
+    });
   }
 
 }
