@@ -1,6 +1,6 @@
 import { Ee5dashboardPage } from './app.po';
 
-describe('ee5dashboard App', () => {
+describe('ee5dashboard App', function() {
   let page: Ee5dashboardPage;
 
   beforeEach(() => {

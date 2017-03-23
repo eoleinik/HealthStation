@@ -44,7 +44,7 @@ export class AF {
   }
 
   getLastTaggedUser() {
-    return this.af.database.object('Tags/LastTaggedUser');
+    return this.af.database.object('Tags/');
   }
 
 }

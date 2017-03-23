@@ -21,6 +21,7 @@ import { IndicatorComponent } from './shared/indicator/indicator.component';
 import { TableChartComponent } from './shared/table-chart/table-chart.component';
 import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
 import { LiveViewComponent } from './live-view/live-view.component';
+import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 
 
 // Must export the configKey
@@ -53,7 +54,8 @@ const routes: Routes = [
     IndicatorComponent,
     TableChartComponent,
     PieChartComponent,
-    LiveViewComponent
+    LiveViewComponent,
+    PatientRegistrationComponent
   ],
   imports: [
     BrowserModule,

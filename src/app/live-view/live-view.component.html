@@ -6,4 +6,6 @@
   </div>
 </div>
 
-<user-dashboard *ngIf="userKey" [key]="userKey"></user-dashboard>
+<patient-registration *ngIf="userKey && !(userObj?.FirstName)" [id]="userKey" ></patient-registration>
+
+<user-dashboard *ngIf="userKey && userObj?.FirstName" [key]="userKey"></user-dashboard>

@@ -9,6 +9,7 @@ import {AF} from "../../providers/af";
 export class LiveViewComponent implements OnInit {
 
   public userKey;
+  public userObj;
 
   constructor(public afService: AF) {
   }
@@ -16,7 +17,13 @@ export class LiveViewComponent implements OnInit {
   ngOnInit() {
     this.afService.getLastTaggedUser().subscribe(snapshot => {
       console.log(snapshot);
-      this.userKey = snapshot.$value;
+      this.userKey = snapshot.LastTaggedUser;
+      if (this.userKey != "") {
+        this.afService.getPatient(this.userKey).subscribe(userObj => {
+          console.log(userObj);
+          this.userObj = userObj;
+        })
+      }
     })
   }
 
