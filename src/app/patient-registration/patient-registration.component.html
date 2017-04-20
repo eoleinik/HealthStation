@@ -1,10 +1,124 @@
 <div class="container">
-  <h1>
-    Please register
-  </h1>
-  <p>
-    Your id is: {{id}}
-  </p>
-
-  <button class="btn btn-default" (click)="registerPatient()">Register patient</button>
+  <div class="col-md-4 col-md-offset-4">
+    <h1>
+      Please register
+    </h1>
+    <br>
+    <form>
+      <fieldset disabled>
+      <div class="form-group">
+        <label for="id">Your ID number</label>
+        <input type="text" class="form-control" placeholder={{id}} id="id" required>
+      </div>
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" [value]="firstName" placeholder={{firstName}} id="firstName" required>
+      </div>
+      <div class="form-group">
+        <label for="secondName">Second Name</label>
+        <input type="text" class="form-control" name="secondName" [value]="secondName" placeholder={{secondName}} id="secondName" required>
+      </div>
+      </fieldset>
+      <div class="form-group">
+        <label for="dob">Date of birth</label>
+        <input type="date" [(ngModel)]="patient.dob" class="form-control" name="dob" id="dob" required/>
+      </div>
+      <p>
+        <b>
+          Gender
+        </b>
+      </p>
+      <div class="radio">
+        <label>
+          <input type="radio" [(ngModel)]="patient.sex" name="optionsRadios" id="optionsRadios1" value="Female" checked>
+          Female
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" [(ngModel)]="patient.sex" name="optionsRadios" id="optionsRadios2" value="Male">
+          Male
+        </label>
+      </div>
+      <!--<div class="form-group">-->
+        <!--<label for="height">Height (in cm) </label>-->
+        <!--<input type="text" class="form-control" id="height">-->
+        <!--<select class="form-control">-->
+          <!--<option>150</option>-->
+        <!--</select>-->
+      <!--</div>-->
+      <p>
+        <b>
+          Height (in cm)
+        </b>
+      </p>
+      <div>
+        <select class="form-control" [(ngModel)]="patient.height" name="height">
+          <option>130</option>
+          <option>131</option>
+          <option>132</option>
+          <option>133</option>
+          <option>134</option>
+          <option>135</option>
+          <option>136</option>
+          <option>137</option>
+          <option>138</option>
+          <option>139</option>
+          <option>140</option>
+          <option>141</option>
+          <option>142</option>
+          <option>143</option>
+          <option>144</option>
+          <option>145</option>
+          <option>146</option>
+          <option>147</option>
+          <option>148</option>
+          <option>149</option>
+          <option>150</option>
+          <option>151</option>
+          <option>152</option>
+          <option>153</option>
+          <option>154</option>
+          <option>155</option>
+          <option>156</option>
+          <option>157</option>
+          <option>158</option>
+          <option>159</option>
+          <option>160</option>
+          <option>161</option>
+          <option>162</option>
+          <option>163</option>
+          <option>164</option>
+          <option>165</option>
+          <option>166</option>
+          <option>167</option>
+          <option>168</option>
+          <option>169</option>
+          <option>170</option>
+          <option>171</option>
+          <option>172</option>
+          <option>173</option>
+          <option>174</option>
+          <option>175</option>
+          <option>176</option>
+          <option>177</option>
+          <option>178</option>
+          <option>179</option>
+          <option>180</option>
+          <option>181</option>
+          <option>182</option>
+          <option>183</option>
+          <option>184</option>
+          <option>185</option>
+          <option>186</option>
+          <option>187</option>
+          <option>188</option>
+          <option>189</option>
+          <option>190</option>
+        </select>
+      </div>
+      <br>
+      <button class="btn btn-success" (click)="registerPatient()">Register patient</button>
+    </form>
+  </div>
 </div>

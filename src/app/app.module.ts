@@ -23,7 +23,6 @@ import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
 import { LiveViewComponent } from './live-view/live-view.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 
-
 // Must export the configKey
 export const firebaseConfig = {
   apiKey: "AIzaSyCi0NPiuB2kLpQRT5mggyZprxhFfuvr3xo",

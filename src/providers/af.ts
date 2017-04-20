@@ -47,7 +47,9 @@ export class AF {
     return this.af.database.object('Tags/');
   }
 
-  registerUser(id: string, firstName: string, secondName: string, sex: string, dob: number, height: number) {
+
+
+  registerUser(id: string, firstName: string, secondName: string, dob: number, sex: string, height: number) {
     return this.getPatients().update(id, {
       FirstName: firstName,
       SecondName: secondName,
