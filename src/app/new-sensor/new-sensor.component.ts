@@ -41,7 +41,7 @@ export class NewSensorComponent implements OnInit {
     console.log(this.chosenSensor);
     if (this.chosenSensor) {
       let obs = this.afService.addConfigForPatient(this.key, this.chosenSensor.$key);
-      obs.then(result => this.router.navigate(['/patient-details', this.key]));
+      obs.then(result => this.location.back());
     }
   }
 
