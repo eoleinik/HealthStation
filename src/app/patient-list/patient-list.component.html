@@ -13,14 +13,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let patient of patients | async ; let i = index">
-          <td><b>{{ i+1 }}</b></td>
-          <td>{{ patient.FirstName }}</td>
-          <td>{{ patient.SecondName }}</td>
-          <td>{{ patient.BirthDate | date:'mediumDate'}}</td>
-          <td>
-            <button [routerLink]="['/patient-details', patient.$key]" class="btn btn-sm btn-default">See dashboard</button>
-          </td>
+        <tr *ngFor="let patient of patients | async ; let i = index"  [ngClass]="patientStatus[patient.$key]">
+
+              <td><b>{{ i+1 }}</b></td>
+              <td>{{ patient.FirstName }}</td>
+              <td>{{ patient.SecondName }}</td>
+              <td>{{ patient.BirthDate | date:'mediumDate'}}</td>
+              <td>
+                <button [routerLink]="['/patient-details', patient.$key]" class="btn btn-sm btn-default">See dashboard</button>
+              </td>
+
         </tr>
       </tbody>
     </table>

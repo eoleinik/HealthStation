@@ -31,6 +31,14 @@ export class AF {
     });
   }
 
+  getBMI(userKey: string, sensorKey: string, seriesKey: string){
+    return this.af.database.list('MeasurementsF/'+userKey+'/'+sensorKey+'/'+seriesKey, {
+      query: {
+        limitToLast: 1
+      }
+    });
+  }
+
   getPatients() {
     return this.af.database.list('UsersF/');
   }
@@ -50,8 +58,6 @@ export class AF {
   getLastTaggedUser() {
     return this.af.database.object('Tags/');
   }
-
-
 
   registerUser(id: string, firstName: string, secondName: string, dob: number, sex: string, height: number) {
     return this.getPatients().update(id, {
