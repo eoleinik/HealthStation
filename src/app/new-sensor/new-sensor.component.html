@@ -2,12 +2,24 @@
   <div class="col-md-8 col-md-offset-2">
     <h2>Add a new sensor</h2>
 
+    <ng-container *ngFor="let config of configs | async; let i = index">
+      <div class="col-md-4">
+        <div class="panel panel-default text-center config"
+             (click)="selectConfig(config)"
+             [class.selected]="chosenSensor === config">
+          <h4>{{ config.Name }}</h4>
+          <h4><small>{{ config.ChartKey }}</small></h4>
 
-    <div id="chosen-sensor" class="jumbotron">
-      {{ chosenSensor }}
-    </div>
+        </div>
+      </div>
+      <div *ngIf="i%3==2" class="clearfix"></div>
+    </ng-container>
 
-    <button class="btn btn-default">Cancel</button>
-    <button class="btn btn-primary">Add it!</button>
+    <!--<div *ngIf="chosenSensor" id="chosen-sensor" class="jumbotron">-->
+      <!--<p class="lead">{{ chosenSensor.Name }}</p>-->
+    <!--</div>-->
+
+    <button class="btn btn-default" (click)="goBack()">Cancel</button>
+    <button class="btn btn-success" (click)="addSensor()">Add it!</button>
   </div>
 </div>

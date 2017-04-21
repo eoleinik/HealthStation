@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'choose-patient', component: PatientListComponent},
   { path: 'live', component: LiveViewComponent},
   { path: 'patient-details/:id', component: UserDashboardComponent},
-  { path: 'add-sensor', component: NewSensorComponent}
+  { path: 'add-sensor/:id', component: NewSensorComponent}
 ];
 
 @NgModule({

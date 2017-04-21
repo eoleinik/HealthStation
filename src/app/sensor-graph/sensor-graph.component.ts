@@ -64,7 +64,7 @@ export class SensorGraphComponent implements OnInit {
   }
 
   public containsData() {
-    return this.data.length > 0 && this.data.some(series => series.data.length != 0); //some(series => series.data.length != 0);
+    return this.data.length > 0 && this.data.some(series => series.data.length != 0);
   }
 
   ngOnInit() {
@@ -80,7 +80,6 @@ export class SensorGraphComponent implements OnInit {
     //         this.afService.getSeriesName(configObj.SensorKey, aSeries.$key).subscribe(seriesObj => {
     //           let tempDict = {data: measurements, label: seriesObj.Type};
     //           this.data.push(tempDict);
-    //           console.log(this.data);
     //         });
     //       }
     //     );
@@ -95,6 +94,7 @@ export class SensorGraphComponent implements OnInit {
         Object.keys(configObj.TimeSeries).forEach(type => {
           this.afService.getSeriesName(configObj.SensorKey, configObj.TimeSeries[type].SeriesKey).subscribe(seriesName => {
             let selected = allTypes.find(aType => aType.$key == configObj.TimeSeries[type].SeriesKey);
+            if (selected) {
             let measurements = [];
             let new_labels = [];
             let measKeys = Object.keys(selected);
@@ -111,14 +111,14 @@ export class SensorGraphComponent implements OnInit {
             this.units = seriesName.Unit;
             let tempDict = {data: measurements, label: seriesName.Type};
             this.data.push(tempDict);
+            }
           });
         });
       });
 
-      measurementsObservable.$ref.on('child_changed', data => {
-        console.log("lol"+this.STATE);
-          this.STATE = 'active';
-          this.cdr.detectChanges();
+      measurementsObservable.$ref.on('child_changed', () => {
+        this.STATE = 'active';
+        this.cdr.detectChanges();
       });
 
     });
@@ -141,7 +141,6 @@ export class SensorGraphComponent implements OnInit {
     //   allSeriesData.map(oneSeriesData => {
     //     oneSeriesData.subscribe(finalData => {
     //       finalData.subscribe(smth => {
-    //         console.log(smth);
     //         this.data.push(smth);
     //       })
     //     })

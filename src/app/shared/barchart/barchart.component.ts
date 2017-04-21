@@ -28,7 +28,6 @@ export class BarchartComponent implements OnInit {
   ngOnInit() {
     this.createChart();
     if (this.data) {
-      console.log(this.yScale(0));
       this.updateChart();
     }
   }

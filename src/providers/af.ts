@@ -15,6 +15,10 @@ export class AF {
     return this.af.database.object('SensorConfigs/'+configKey);
   }
 
+  getConfigs() {
+    return this.af.database.list('SensorConfigs/');
+  }
+
   getMeasurementsForUserAndSensor(userKey: string, sensorKey: string) {
     return this.af.database.list('MeasurementsF/'+userKey+'/'+sensorKey);
   }
@@ -36,7 +40,7 @@ export class AF {
   }
 
   addConfigForPatient(userKey: string, configKey: string) {
-    return this.getConfigsForPatient(userKey).push({name: configKey});
+    return this.getConfigsForPatient(userKey).push({ConfigKey: configKey});
   }
 
   getSeriesName(sensorKey: string, seriesKey: string) {

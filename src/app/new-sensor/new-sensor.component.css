@@ -1,0 +1,15 @@
+.selected {
+  box-shadow: 0px 0px 10px 0px #71afff;
+  border-color: #909cca;
+}
+
+.config {
+  /*min-height: 70px;*/
+}
+
+.jumbotron {
+}
+
+.panel:hover {
+  background-color: #f0f0f0;
+}
