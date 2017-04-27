@@ -20,7 +20,6 @@ export class PatientListComponent implements OnInit {
     observable.subscribe(data => {
       let BMI = data[0] ? data[0].Value : null;
       let status = 'default';
-      console.log(BMI);
       // determine status
       if (BMI < 18.5) {
         status = 'danger';
@@ -35,7 +34,6 @@ export class PatientListComponent implements OnInit {
         status = 'danger';
       }
       this.patientStatus[patient.$key] = status;
-      console.log(this.patientStatus);
     });
   }
 

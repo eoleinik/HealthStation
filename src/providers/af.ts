@@ -1,5 +1,8 @@
 import {Injectable} from "@angular/core";
 import {AngularFire, AuthProviders, AuthMethods, FirebaseListObservable} from 'angularfire2';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+
 
 @Injectable()
 export class AF {
@@ -67,6 +70,10 @@ export class AF {
       Sex: sex,
       Height: height
     });
+  }
+
+  getAccountClass(id: string) {
+    return this.af.database.object('Accounts/'+id).map(obj => obj.Class);
   }
 
 }

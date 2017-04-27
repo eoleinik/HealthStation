@@ -22,6 +22,8 @@ import { TableChartComponent } from './shared/table-chart/table-chart.component'
 import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
 import { LiveViewComponent } from './live-view/live-view.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
+import { LoginComponent } from './login/login.component';
+import {NurseGuard, RoomGuard} from "./auth.service";
 
 // Must export the configKey
 export const firebaseConfig = {
@@ -34,10 +36,11 @@ export const firebaseConfig = {
 
 const routes: Routes = [
   { path: '', redirectTo: 'choose-patient', pathMatch: 'full' },
-  { path: 'choose-patient', component: PatientListComponent},
-  { path: 'live', component: LiveViewComponent},
-  { path: 'patient-details/:id', component: UserDashboardComponent},
-  { path: 'add-sensor/:id', component: NewSensorComponent}
+  { path: 'choose-patient', component: PatientListComponent, canActivate: [NurseGuard]},
+  { path: 'live', component: LiveViewComponent, canActivate: [RoomGuard]},
+  { path: 'patient-details/:id', component: UserDashboardComponent, canActivate: [NurseGuard]},
+  { path: 'add-sensor/:id', component: NewSensorComponent, canActivate: [NurseGuard]},
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
@@ -54,7 +57,8 @@ const routes: Routes = [
     TableChartComponent,
     PieChartComponent,
     LiveViewComponent,
-    PatientRegistrationComponent
+    PatientRegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     ChartsModule
   ],
-  providers: [ AF, DatePipe ],
+  providers: [ AF, DatePipe, NurseGuard, RoomGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
