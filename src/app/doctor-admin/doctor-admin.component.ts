@@ -33,9 +33,17 @@ export class DoctorAdminComponent implements OnInit {
     this.rooms = this.afService.getAccountsForHospital('Hospital X', ['Room']);
     this.staff = this.afService.getAccountsForHospital('Hospital X', ['Nurse', 'Doctor', 'Superuser']);
 
-
   }
 
-
+  deleteRoom(room) {
+    if (room.$key) {
+      this.afService.removeAccount(room.$key).then(success => {
+        this.afService.emptyIdMapping(room.$key);
+      }, reject => {
+        console.log(reject);
+      });
+    }
+    return false;
+  }
 
 }

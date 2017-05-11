@@ -6,7 +6,7 @@
         <h3>Staff</h3>
       </div>
       <div class="list-group">
-        <a *ngFor="let person of staff | async" href="#" class="list-group-item">
+        <a *ngFor="let person of staff | async" class="list-group-item">
           <h4 class="list-group-item-heading">{{ person.Name }}</h4>
           <p class="list-group-item-text">{{ person.Class }}</p>
         </a>
@@ -25,9 +25,18 @@
         <h3>Rooms/Devices</h3>
       </div>
       <div class="list-group">
-        <a *ngFor="let room of rooms | async" href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">{{ room.Name }}</h4>
-          <p class="list-group-item-text">{{ room.Class }}</p>
+        <a *ngFor="let room of rooms | async" class="list-group-item">
+          <div class="row">
+            <div class="col-xs-10">
+              <h4 class="list-group-item-heading">{{ room.Name }}</h4>
+              <p class="list-group-item-text">{{ room.Class }}</p>
+            </div>
+            <div class="col-xs-2">
+              <a class="btn btn-lg" (click)="deleteRoom(room); $event.stopPropagation()">
+                <span class="glyphicon glyphicon-remove"></span>
+              </a>
+            </div>
+          </div>
         </a>
       </div>
 

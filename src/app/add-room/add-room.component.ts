@@ -53,7 +53,6 @@ export class AddRoomComponent implements OnInit {
   }
 
 
-
   onSubmit(formData) {
     if(formData.valid) {
       this.afService.checkHardwareId(formData.value.hardwareid).subscribe(status => {

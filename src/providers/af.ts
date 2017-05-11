@@ -104,6 +104,26 @@ export class AF {
     return a.map(dataArray => dataArray.filter(item => accountClass.indexOf(item.Class) > -1));
   }
 
+  removeAccount(uid: string) {
+    return this.af.database.object('Accounts/'+uid).remove();
+  }
+
+  emptyIdMapping(uid: string) {
+    let mappings = this.af.database.list('IDMapping/', {
+      query: {
+        orderByChild: 'UID',
+        equalTo: uid
+      }
+    });
+    return mappings.subscribe(mappingsList => {
+      if (mappingsList.length) {
+        this.af.database.object('IDMapping/'+mappingsList[0].$key).update({
+          UID: ""
+        });
+      }
+    });
+  }
+
   checkHardwareId(hardwareId: string) {
     return this.af.database.object('IDMapping/'+hardwareId).map(obj => (!!obj && obj.UID !== undefined && obj.UID.length == 0));
   }
