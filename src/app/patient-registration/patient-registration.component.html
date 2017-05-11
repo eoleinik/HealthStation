@@ -117,7 +117,11 @@
           <option>190</option>
         </select>
       </div>
-      <br>
+      <br style="line-height: 3px" />
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" [(ngModel)]="patient.email" class="form-control" name="email" [value]="email" placeholder={{email}} id="email" required>
+      </div>
       <button class="btn btn-success" (click)="registerPatient()">Register patient</button>
     </form>
   </div>
