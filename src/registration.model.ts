@@ -6,5 +6,6 @@ export class RegistrationForm {
     public dob: string,
     public sex: string,
     public height: number,
+    public email: string,
   ){}
 }

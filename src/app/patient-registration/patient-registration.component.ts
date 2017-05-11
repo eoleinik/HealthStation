@@ -21,12 +21,12 @@ export class PatientRegistrationComponent implements OnInit {
   public patient: RegistrationForm;
 
   constructor(public afService: AF) {
-    this.patient = new RegistrationForm(this.id, this.firstName, this.secondName, '1970-01-01', "", 170);
+    this.patient = new RegistrationForm(this.id, this.firstName, this.secondName, '1970-01-01', "", 170, "email@gmail.com");
   }
 
   registerPatient() {
     var d: Date = new Date(this.patient.dob);
-    this.afService.registerPatient(this.id, this.firstName, this.secondName, d.getTime(), this.patient.sex, this.patient.height);
+    this.afService.registerPatient(this.id, this.firstName, this.secondName, d.getTime(), this.patient.sex, this.patient.height, this.patient.email);
   }
 
   ngOnInit() {

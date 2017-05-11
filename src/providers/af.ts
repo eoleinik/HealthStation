@@ -67,13 +67,14 @@ export class AF {
     return this.af.database.object('Tags/'+roomId);
   }
 
-  registerPatient(id: string, firstName: string, secondName: string, dob: number, sex: string, height: number) {
+  registerPatient(id: string, firstName: string, secondName: string, dob: number, sex: string, height: number, email: string) {
     return this.getPatients().update(id, {
       FirstName: firstName,
       SecondName: secondName,
       BirthDate: dob,
       Sex: sex,
-      Height: height
+      Height: height,
+      Email: email
     });
   }
 
