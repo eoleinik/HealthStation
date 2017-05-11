@@ -1,7 +1,12 @@
 import {Injectable} from "@angular/core";
-import {AngularFire, AuthProviders, AuthMethods, FirebaseListObservable} from 'angularfire2';
+import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/mergeAll';
+
+import {Observable} from "rxjs";
 
 
 @Injectable()
@@ -58,11 +63,11 @@ export class AF {
     return this.af.database.object('SensorsF/'+sensorKey+'/Series/'+seriesKey);
   }
 
-  getLastTaggedUser() {
-    return this.af.database.object('Tags/');
+  getLastTaggedUser(roomId: string) {
+    return this.af.database.object('Tags/'+roomId);
   }
 
-  registerUser(id: string, firstName: string, secondName: string, dob: number, sex: string, height: number) {
+  registerPatient(id: string, firstName: string, secondName: string, dob: number, sex: string, height: number) {
     return this.getPatients().update(id, {
       FirstName: firstName,
       SecondName: secondName,
@@ -72,8 +77,40 @@ export class AF {
     });
   }
 
+  addAccountMetadata(uid: string, Class: string, Hospital: string, Name: string) {
+    return this.af.database.list('Accounts').update(uid, {
+      Class: Class,
+      Hospital: Hospital,
+      Name: Name
+    })
+  }
+
   getAccountClass(id: string) {
     return this.af.database.object('Accounts/'+id).map(obj => obj.Class);
+  }
+
+  getAccountHospital(id: string) {
+    return this.af.database.object('Accounts/'+id).map(obj => obj.Hospital);
+  }
+
+  getAccountsForHospital(hospital: string, accountClass: Array<string>): Observable<Array<any>> {
+    let a: FirebaseListObservable<Array<any>> = this.af.database.list('Accounts', {
+      query: {
+        orderByChild: 'Hospital',
+        equalTo: hospital
+      }
+    });
+    return a.map(dataArray => dataArray.filter(item => accountClass.indexOf(item.Class) > -1));
+  }
+
+  checkHardwareId(hardwareId: string) {
+    return this.af.database.object('IDMapping/'+hardwareId).map(obj => (!!obj && obj.UID !== undefined && obj.UID.length == 0));
+  }
+
+  addIdMapping(hardwareId: string, accountNr: string) {
+    return this.af.database.list('IDMapping/').update(hardwareId, {
+      UID: accountNr
+    });
   }
 
 }

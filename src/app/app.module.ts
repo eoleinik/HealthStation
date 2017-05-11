@@ -23,16 +23,20 @@ import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
 import { LiveViewComponent } from './live-view/live-view.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { LoginComponent } from './login/login.component';
-import {NurseGuard, RoomGuard} from "./auth.service";
+import { NurseGuard, RoomGuard, SuperuserGuard, AuthStatus } from "./auth.service";
+import { DoctorAdminComponent } from './doctor-admin/doctor-admin.component';
+import { AddRoomComponent } from './add-room/add-room.component';
+import { environment } from '../environments/environment';
+
 
 // Must export the configKey
-export const firebaseConfig = {
-  apiKey: "AIzaSyCi0NPiuB2kLpQRT5mggyZprxhFfuvr3xo",
-  authDomain: "ee5dashboard.firebaseapp.com",
-  databaseURL: "https://ee5dashboard.firebaseio.com",
-  storageBucket: "ee5dashboard.appspot.com",
-  messagingSenderId: "848081157972"
-};
+// export const firebaseConfig = {
+//   apiKey: "AIzaSyCi0NPiuB2kLpQRT5mggyZprxhFfuvr3xo",
+//   authDomain: "ee5dashboard.firebaseapp.com",
+//   databaseURL: "https://ee5dashboard.firebaseio.com",
+//   storageBucket: "ee5dashboard.appspot.com",
+//   messagingSenderId: "848081157972"
+// };
 
 const routes: Routes = [
   { path: '', redirectTo: 'choose-patient', pathMatch: 'full' },
@@ -40,7 +44,9 @@ const routes: Routes = [
   { path: 'live', component: LiveViewComponent, canActivate: [RoomGuard]},
   { path: 'patient-details/:id', component: UserDashboardComponent, canActivate: [NurseGuard]},
   { path: 'add-sensor/:id', component: NewSensorComponent, canActivate: [NurseGuard]},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'admin', component: DoctorAdminComponent, canActivate: [SuperuserGuard]},
+  { path: 'add-room/:hospitalid', component: AddRoomComponent, canActivate: [SuperuserGuard]}
 ];
 
 @NgModule({
@@ -58,17 +64,19 @@ const routes: Routes = [
     PieChartComponent,
     LiveViewComponent,
     PatientRegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    DoctorAdminComponent,
+    AddRoomComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     ChartsModule
   ],
-  providers: [ AF, DatePipe, NurseGuard, RoomGuard ],
+  providers: [ AF, DatePipe, NurseGuard, RoomGuard, SuperuserGuard, AuthStatus],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

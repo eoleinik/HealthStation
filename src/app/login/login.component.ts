@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         }).then(
         (success) => {
           this.afService.getAccountClass(success.uid).subscribe(type => {
-            if (type == 'Nurse' || type == 'Doctor') {
+            if (type == 'Nurse' || type == 'Doctor' || type == 'Superuser') {
               this.router.navigate(['/choose-patient']);
             } else {
               this.router.navigate(['/live']);
@@ -48,5 +48,4 @@ export class LoginComponent implements OnInit {
         })
     }
   }
-
 }

@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import { AF } from "../../providers/af";
 import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2";
 import {ActivatedRoute, Params} from "@angular/router";
+import {AuthStatus} from "../auth.service";
 
 import 'rxjs/add/operator/switchMap';
 
@@ -19,7 +20,7 @@ export class UserDashboardComponent implements OnInit {
   public patient: FirebaseObjectObservable<any>;
 
 
-  constructor(public afService: AF, private route: ActivatedRoute) {
+  constructor(public afService: AF, private route: ActivatedRoute, public authStatus: AuthStatus) {
 
   }
 
@@ -35,5 +36,7 @@ export class UserDashboardComponent implements OnInit {
       this.configs = this.afService.getConfigsForPatient(this.key);
     }
   }
+
+
 
 }

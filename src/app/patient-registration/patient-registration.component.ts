@@ -26,7 +26,7 @@ export class PatientRegistrationComponent implements OnInit {
 
   registerPatient() {
     var d: Date = new Date(this.patient.dob);
-    this.afService.registerUser(this.id, this.firstName, this.secondName, d.getTime(), this.patient.sex, this.patient.height);
+    this.afService.registerPatient(this.id, this.firstName, this.secondName, d.getTime(), this.patient.sex, this.patient.height);
   }
 
   ngOnInit() {

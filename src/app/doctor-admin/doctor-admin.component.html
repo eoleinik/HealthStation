@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Admin panel | {{ hospital }}</h2>
+  <div class="col-md-6">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="text-center">
+        <h3>Staff</h3>
+      </div>
+      <div class="list-group">
+        <a *ngFor="let person of staff | async" href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">{{ person.Name }}</h4>
+          <p class="list-group-item-text">{{ person.Class }}</p>
+        </a>
+      </div>
+
+      <a class="btn btn-success btn-lg">
+        Add staff
+      </a>
+
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="text-center">
+        <h3>Rooms/Devices</h3>
+      </div>
+      <div class="list-group">
+        <a *ngFor="let room of rooms | async" href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">{{ room.Name }}</h4>
+          <p class="list-group-item-text">{{ room.Class }}</p>
+        </a>
+      </div>
+
+      <a [routerLink]="['/add-room', hospital]" class="btn btn-primary btn-lg">
+        Add device
+      </a>
+
+    </div>
+  </div>
+
+
+</div>
