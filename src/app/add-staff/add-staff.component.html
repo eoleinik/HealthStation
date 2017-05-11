@@ -1,0 +1,39 @@
+<div class="col-md-4 col-md-offset-4">
+  <div class="form-container">
+    <h2>Add staff</h2>
+
+    <div *ngIf="error" class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Oops!</strong> {{ error }}
+    </div>
+
+    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+
+      <div class="form-group">
+        <label for="staffName">Room name</label>
+        <input id="staffName" type="text" placeholder="ex. John Doe" (ngModel)="staffName" name="staffName" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select class="form-control" (ngModel)="role" name="role" id="role">
+          <option>Doctor</option>
+          <option>Nurse</option>
+          <option>Superuser</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="text" placeholder="Email address" (ngModel)="email" name="email" class="form-control" required minlength="5">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Password" (ngModel)="password" name="password" class="form-control" required minlength="6">
+      </div>
+
+      <button type="submit" [disabled]="!formData.valid" class="btn btn-success">Add staff</button>
+    </form>
+  </div>
+</div>

@@ -46,4 +46,11 @@ export class DoctorAdminComponent implements OnInit {
     return false;
   }
 
+  deleteStaff(staff) {
+    if (staff.$key) {
+      this.afService.removeAccount(staff.$key);
+    }
+    return false;
+  }
+
 }

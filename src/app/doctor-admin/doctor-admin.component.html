@@ -6,13 +6,48 @@
         <h3>Staff</h3>
       </div>
       <div class="list-group">
-        <a *ngFor="let person of staff | async" class="list-group-item">
-          <h4 class="list-group-item-heading">{{ person.Name }}</h4>
-          <p class="list-group-item-text">{{ person.Class }}</p>
+        <a *ngFor="let person of staff | async; let i = index" class="list-group-item">
+          <div class="row">
+            <div class="col-xs-10">
+              <h4 class="list-group-item-heading">{{ person.Name }}</h4>
+              <p class="list-group-item-text">{{ person.Class }}</p>
+            </div>
+            <div class="col-xs-2">
+              <a *ngIf="person.Class!='Superuser'" class="btn btn-lg" (click)="deleteStaff(person); $event.stopPropagation()">
+                <span class="glyphicon glyphicon-remove"></span>
+              </a>
+
+              <a *ngIf="person.Class=='Superuser'" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-lg" >
+                <span class="glyphicon glyphicon-remove"></span>
+              </a>
+
+            </div>
+          </div>
+
+          <ng-container *ngIf="person.Class=='Superuser'">
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+              <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Warning</h4>
+                    <div class="modal-body">
+                      Are you sure you want to delete a superuser?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteStaff(person); $event.stopPropagation()">Yes, delete!</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
         </a>
       </div>
 
-      <a class="btn btn-success btn-lg">
+      <a [routerLink]="['/add-staff', hospital]" class="btn btn-success btn-lg">
         Add staff
       </a>
 

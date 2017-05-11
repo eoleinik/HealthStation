@@ -27,6 +27,7 @@ import { NurseGuard, RoomGuard, SuperuserGuard, AuthStatus } from "./auth.servic
 import { DoctorAdminComponent } from './doctor-admin/doctor-admin.component';
 import { AddRoomComponent } from './add-room/add-room.component';
 import { environment } from '../environments/environment';
+import { AddStaffComponent } from './add-staff/add-staff.component';
 
 
 // Must export the configKey
@@ -46,7 +47,8 @@ const routes: Routes = [
   { path: 'add-sensor/:id', component: NewSensorComponent, canActivate: [NurseGuard]},
   { path: 'login', component: LoginComponent},
   { path: 'admin', component: DoctorAdminComponent, canActivate: [SuperuserGuard]},
-  { path: 'add-room/:hospitalid', component: AddRoomComponent, canActivate: [SuperuserGuard]}
+  { path: 'add-room/:hospitalid', component: AddRoomComponent, canActivate: [SuperuserGuard]},
+  { path: 'add-staff/:hospitalid', component: AddStaffComponent, canActivate: [SuperuserGuard]}
 ];
 
 @NgModule({
@@ -66,7 +68,8 @@ const routes: Routes = [
     PatientRegistrationComponent,
     LoginComponent,
     DoctorAdminComponent,
-    AddRoomComponent
+    AddRoomComponent,
+    AddStaffComponent
   ],
   imports: [
     BrowserModule,
