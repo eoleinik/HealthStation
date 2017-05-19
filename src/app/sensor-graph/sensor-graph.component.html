@@ -19,6 +19,10 @@
       <pie-chart *ngIf="(configObj | async)?.ChartKey == 'PieChart'" [chartData]="data"></pie-chart>
     </ng-container>
 
+    <a class="" (click)="removeConfig(); $event.stopPropagation()">
+      <p class="small">Remove chart</p>
+    </a>
+
     <div *ngIf="!containsData()" id="chart-replacement" class="text-center">
       <p class="lead">No data... yet</p>
     </div>

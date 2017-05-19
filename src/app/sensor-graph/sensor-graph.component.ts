@@ -149,4 +149,8 @@ export class SensorGraphComponent implements OnInit {
     // });
 
   }
+
+  removeConfig() {
+    this.afService.removeConfig(this.configKey, this.userKey);
+  }
 }

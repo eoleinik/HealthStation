@@ -29,6 +29,17 @@ export class AF {
     return this.af.database.list('SensorConfigs/');
   }
 
+  removeConfig(configKey: string, userKey: string) {
+    return this.af.database.list('UsersF/'+userKey+'/Configurations', {
+      query: {
+        orderByChild: 'ConfigKey',
+        equalTo: configKey
+      }
+    }).subscribe(configurations => configurations.forEach(config => {
+      this.af.database.object('UsersF/'+userKey+'/Configurations/'+config.$key).remove();
+    }));
+  }
+
   getMeasurementsForUserAndSensor(userKey: string, sensorKey: string) {
     return this.af.database.list('MeasurementsF/'+userKey+'/'+sensorKey);
   }
