@@ -55,6 +55,7 @@ export class AddRoomComponent implements OnInit {
 
   onSubmit(formData) {
     if(formData.valid) {
+
       this.afService.checkHardwareId(formData.value.hardwareid).subscribe(status => {
         if (status) {
           let email = formData.value.email;
@@ -70,16 +71,23 @@ export class AddRoomComponent implements OnInit {
             copyAfService.addIdMapping(formData.value.hardwareid, firebaseUser.uid).then(success => {
               copyAfService.addAccountMetadata(firebaseUser.uid, 'Room', this.hospital, roomName).then(success => {
                 this.location.back();
-              }, (err) => this.error = err
+              }, (err) =>  {
+                this.error = err;
+                }
               );
-            }, (err) => this.error = err
+            }, (err) => {
+              this.error = err;
+              }
             );
-          }, (err) => this.error = err
+          }, (err) => {
+            this.error = err;
+            }
           );
 
         } else {
-          console.log("Not allowed to add mapping");
-          this.error = "This hardware id is not available."
+
+          // console.log("Not allowed to add mapping");
+          // this.error = "This hardware id is not available."
         }
       })
     }

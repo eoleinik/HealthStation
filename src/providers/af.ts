@@ -1,10 +1,12 @@
 import {Injectable} from "@angular/core";
-import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import {AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/mergeAll';
+import 'rxjs/add/operator/merge';
 
 import {Observable} from "rxjs";
 
@@ -51,6 +53,16 @@ export class AF {
     return this.af.database.list('UsersF/');
   }
 
+  getPatientsForHospital(hospitalId: string): FirebaseListObservable<any> {
+    let patients = this.af.database.list('Hospitals/'+hospitalId+'/Patients') as Observable<any>;
+    return patients.map(allPatients => {
+      let patientObjects: Array<Observable<any>> = allPatients.map(patient => {
+        return this.getPatient(patient.$key) as Observable<any>;
+      });
+      return Observable.combineLatest(patientObjects);
+    }).mergeAll() as FirebaseListObservable<any>;
+  }
+
   getPatient(userKey: string) {
     return this.af.database.object('UsersF/'+userKey);
   }
@@ -67,7 +79,7 @@ export class AF {
     return this.af.database.object('Tags/'+roomId);
   }
 
-  registerPatient(id: string, firstName: string, secondName: string, dob: number, sex: string, height: number, email: string) {
+  registerPatient(id: string, firstName: string, secondName: string, dob: number, sex: string, height: number, email: string, hospitalId) {
     return this.getPatients().update(id, {
       FirstName: firstName,
       SecondName: secondName,
@@ -75,6 +87,10 @@ export class AF {
       Sex: sex,
       Height: height,
       Email: email
+    }).then(success => {
+      this.af.database.list('Hospitals/'+hospitalId+'/Patients').update(id, {
+        Admin: "False"
+      });
     });
   }
 
@@ -86,12 +102,20 @@ export class AF {
     })
   }
 
+  getRoomName(uid: string) {
+    return this.af.database.object('Accounts/'+uid).map(obj => obj.Name);
+  }
+
   getAccountClass(id: string) {
     return this.af.database.object('Accounts/'+id).map(obj => obj.Class);
   }
 
   getAccountHospital(id: string) {
     return this.af.database.object('Accounts/'+id).map(obj => obj.Hospital);
+  }
+
+  getHospitalName(hospitalId: string) {
+    return this.af.database.object('Hospitals/'+hospitalId).map(obj => obj.Name);
   }
 
   getAccountsForHospital(hospital: string, accountClass: Array<string>): Observable<Array<any>> {
@@ -132,6 +156,10 @@ export class AF {
     return this.af.database.list('IDMapping/').update(hardwareId, {
       UID: accountNr
     });
+  }
+
+  getCurrentHospital(): Observable<string> {
+    return this.af.auth.map(account => this.getAccountHospital(account.uid)).mergeAll();
   }
 
 }

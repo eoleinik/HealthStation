@@ -9,6 +9,7 @@ import { AngularFire } from 'angularfire2';
 })
 export class LiveViewComponent implements OnInit {
 
+  public roomName = "";
   public userKey;
   public userObj;
   public firstName;
@@ -19,9 +20,14 @@ export class LiveViewComponent implements OnInit {
   constructor(public afService: AF, public af: AngularFire) {}
 
   ngOnInit() {
+
     this.af.auth.subscribe(account => {
       if(account) {
         this.account = account;
+
+        this.afService.getRoomName(account.uid).subscribe(roomName => {
+          this.roomName = roomName;
+        });
 
         this.afService.getLastTaggedUser(account.uid).subscribe(snapshot => {
           this.userKey = snapshot.LastTaggedUser;

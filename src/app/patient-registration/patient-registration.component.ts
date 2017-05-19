@@ -12,6 +12,8 @@ export class PatientRegistrationComponent implements OnInit {
   @Input()
   public id;
 
+  public hospitalId;
+
   @Input()
   public firstName;
 
@@ -25,8 +27,10 @@ export class PatientRegistrationComponent implements OnInit {
   }
 
   registerPatient() {
-    var d: Date = new Date(this.patient.dob);
-    this.afService.registerPatient(this.id, this.firstName, this.secondName, d.getTime(), this.patient.sex, this.patient.height, this.patient.email);
+    let d: Date = new Date(this.patient.dob);
+    this.afService.getCurrentHospital().subscribe(hospitalId => {
+      this.afService.registerPatient(this.id, this.firstName, this.secondName, d.getTime(), this.patient.sex, this.patient.height, this.patient.email, hospitalId);
+    });
   }
 
   ngOnInit() {

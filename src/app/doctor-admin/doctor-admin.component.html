@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Admin panel | {{ hospital }}</h2>
+  <h2>Admin panel | {{ hospitalName }}</h2>
   <div class="col-md-6">
     <div class="col-md-10 col-md-offset-1">
       <div class="text-center">
@@ -13,39 +13,37 @@
               <p class="list-group-item-text">{{ person.Class }}</p>
             </div>
             <div class="col-xs-2">
-              <a *ngIf="person.Class!='Superuser'" class="btn btn-lg" (click)="deleteStaff(person); $event.stopPropagation()">
+              <a *ngIf="person.Class!='Superuser'" class="btn btn-lg" (click)="deleteStaff(person.$key); $event.stopPropagation()">
                 <span class="glyphicon glyphicon-remove"></span>
               </a>
 
-              <a *ngIf="person.Class=='Superuser'" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-lg" >
+              <a *ngIf="person.Class=='Superuser'" data-toggle="modal" (click)="staffToDelete = person.$key" data-target=".bs-example-modal-sm" class="btn btn-lg" >
                 <span class="glyphicon glyphicon-remove"></span>
               </a>
 
             </div>
           </div>
 
-          <ng-container *ngIf="person.Class=='Superuser'">
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-              <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Warning</h4>
-                    <div class="modal-body">
-                      Are you sure you want to delete a superuser?
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteStaff(person); $event.stopPropagation()">Yes, delete!</button>
-                    </div>
-                  </div>
+        </a>
+      </div>
+
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Warning</h4>
+                <div class="modal-body">
+                  Are you sure you want to delete a superuser?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteStaff(staffToDelete)">Yes, delete!</button>
                 </div>
               </div>
             </div>
-          </ng-container>
-
-        </a>
-      </div>
+          </div>
+        </div>
 
       <a [routerLink]="['/add-staff', hospital]" class="btn btn-success btn-lg">
         Add staff
