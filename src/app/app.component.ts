@@ -11,6 +11,7 @@ import {AF} from "../providers/af";
 })
 export class AppComponent {
   title = 'app works!';
+  public hospitalName = "";
 
   user = {};
 
@@ -22,6 +23,14 @@ export class AppComponent {
         this.user = {};
       }
     });
+  }
+
+  ngOnInit() {
+    this.afService.getCurrentHospital().subscribe(hospitalId => {
+      this.afService.getHospitalName(hospitalId).subscribe(hospitalName => {
+        this.hospitalName = hospitalName;
+      });
+    })
   }
 
   logout() {
