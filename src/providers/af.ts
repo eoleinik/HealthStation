@@ -159,7 +159,11 @@ export class AF {
   }
 
   getCurrentHospital(): Observable<string> {
-    return this.af.auth.map(account => this.getAccountHospital(account.uid)).mergeAll();
+    return this.af.auth.map(account => {
+      if (account)
+        return this.getAccountHospital(account.uid);
+      else return Observable.from("");
+    }).mergeAll();
   }
 
 }

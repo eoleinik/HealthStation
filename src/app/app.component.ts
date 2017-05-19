@@ -34,9 +34,10 @@ export class AppComponent {
   }
 
   logout() {
-    this.af.auth.logout().then(success =>
-      this.router.navigateByUrl('/login')
-    );
+    this.af.auth.logout().then(success => {
+        this.hospitalName = "";
+        this.router.navigateByUrl('/login')
+    });
   }
 
 }
