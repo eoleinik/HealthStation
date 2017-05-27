@@ -15,23 +15,23 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li>
-          <a routerLink="/choose-patient" *ngIf="authStatus.isNurse() | async" routerLinkActive="active">Patients</a>
+          <a routerLink="/choose-patient" *ngIf="user && (authStatus.isNurse() | async)" routerLinkActive="active">Patients</a>
         </li>
 
         <li>
-          <a routerLink="/live" *ngIf="authStatus.isRoom() | async" routerLinkActive="active">Live</a>
+          <a routerLink="/live" *ngIf="user && (authStatus.isRoom() | async)" routerLinkActive="active">Live</a>
         </li>
 
         <li>
-          <a routerLink="/admin" *ngIf="authStatus.isSuperuser() | async" routerLinkActive="active">Admin Panel</a>
+          <a routerLink="/admin" *ngIf="user && (authStatus.isSuperuser() | async)" routerLinkActive="active">Admin Panel</a>
         </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="!user.uid">
+        <li *ngIf="!user">
           <a routerLink="/login" routerLinkActive="active">Login</a>
         </li>
-        <li *ngIf="user.uid">
+        <li *ngIf="user">
           <a (click)="logout()">Log out</a>
         </li>
       </ul>

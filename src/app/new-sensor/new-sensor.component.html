@@ -14,7 +14,6 @@
 
     <div class="col-md-4">
       <div class="text-center"><h4>Measurements</h4></div>
-
       <div class="list-group">
         <a *ngFor="let measurement of availableMeasurements" (click)="selectMeasurement(measurement)" [class.active]="measurement == selectedMeasurement" class="list-group-item">
           <h4>{{measurement}}</h4>

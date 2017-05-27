@@ -13,14 +13,14 @@ export class AppComponent {
   title = 'app works!';
   public hospitalName = "";
 
-  user = {};
+  public user = undefined;
 
   constructor(private auth: AngularFireAuth, private afService: AF, public af: AngularFire, private router: Router, public authStatus: AuthStatus) {
     this.af.auth.subscribe(user => {
       if(user) {
         this.user = user;
       } else {
-        this.user = {};
+        this.user = undefined;
       }
     });
   }
