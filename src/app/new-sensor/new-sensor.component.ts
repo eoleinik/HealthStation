@@ -16,10 +16,17 @@ export class NewSensorComponent implements OnInit {
   public configs: FirebaseListObservable<any>;
   public key;
 
+  public configSelector;
+  public selectedSensor = null;
+  public availableSensors = [];
+  public selectedMeasurement = null;
+  public availableMeasurements = [];
+  public selectedRepresentation = null;
+  public availableRepresentations = [];
+
   constructor(public afService: AF,
               private route: ActivatedRoute,
-              private location: Location,
-              private router: Router
+              private location: Location
   ) { }
 
   ngOnInit() {
@@ -27,10 +34,28 @@ export class NewSensorComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.key = params['id'];
     });
+
+    this.afService.getConfigSelector().subscribe(configSelector => {
+      this.configSelector = configSelector;
+      this.afService
+      this.availableSensors = Object.keys(configSelector);
+    })
   }
 
-  selectConfig(sensor) {
-    this.chosenSensor = sensor;
+  selectSensor(sensorId: string) {
+    this.selectedSensor = sensorId;
+    this.availableMeasurements = Object.keys(this.configSelector[sensorId]);
+    this.availableRepresentations = [];
+  }
+
+  selectMeasurement(measurementId: string) {
+    this.selectedMeasurement = measurementId;
+    this.availableRepresentations = Object.keys(this.configSelector[this.selectedSensor][measurementId]);
+  }
+
+  selectRepresentation(representationId: string) {
+    this.selectedRepresentation = representationId;
+    this.chosenSensor = this.configSelector[this.selectedSensor][this.selectedMeasurement][representationId];
   }
 
   goBack() {
@@ -38,9 +63,8 @@ export class NewSensorComponent implements OnInit {
   }
 
   addSensor() {
-    console.log(this.chosenSensor);
     if (this.chosenSensor) {
-      let obs = this.afService.addConfigForPatient(this.key, this.chosenSensor.$key);
+      let obs = this.afService.addConfigForPatient(this.key, this.chosenSensor);
       obs.then(result => this.location.back());
     }
   }

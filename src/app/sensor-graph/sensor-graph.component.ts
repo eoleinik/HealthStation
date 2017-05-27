@@ -147,7 +147,6 @@ export class SensorGraphComponent implements OnInit {
     //   });
     //
     // });
-
   }
 
   removeConfig() {

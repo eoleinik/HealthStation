@@ -29,6 +29,10 @@ export class AF {
     return this.af.database.list('SensorConfigs/');
   }
 
+  getConfigSelector() {
+    return this.af.database.object('SelectConfig');
+  }
+
   removeConfig(configKey: string, userKey: string) {
     return this.af.database.list('UsersF/'+userKey+'/Configurations', {
       query: {
@@ -84,6 +88,14 @@ export class AF {
 
   getSeriesName(sensorKey: string, seriesKey: string) {
     return this.af.database.object('SensorsF/'+sensorKey+'/Series/'+seriesKey);
+  }
+
+  getSensorName(sensorKey: string) {
+    return this.af.database.object('SensorsF/'+sensorKey).map(obj => obj.SensorName);
+  }
+
+  getSensorConnection(sensorKey: string) {
+    return this.af.database.object('SensorsF/'+sensorKey).map(obj => obj.ConnectionType);
   }
 
   getLastTaggedUser(roomId: string) {
