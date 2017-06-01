@@ -8,7 +8,9 @@
     <div *ngIf="i%3==2" class="clearfix"></div>
   </ng-container>
 
-  <div *ngIf="(authStatus.isNurse() |async) || (authStatus.isSuperuser() |async)" id="add-new-sensor" class="col-md-4">
+  <!--<div *ngIf="(authStatus.isNurse() |async) || (authStatus.isSuperuser() |async)" id="add-new-sensor" class="col-md-4">-->
+  <div id="add-new-sensor" class="col-md-4">
+
     <div [routerLink]="['/add-sensor', key]" id="add-new-sensor-content" class="text-center">
       <span class="glyphicon glyphicon-plus"></span>
       <p class="lead">Add new sensor</p>

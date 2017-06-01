@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'choose-patient', component: PatientListComponent, canActivate: [NurseGuard]},
   { path: 'live', component: LiveViewComponent, canActivate: [RoomGuard]},
   { path: 'patient-details/:id', component: UserDashboardComponent, canActivate: [NurseGuard]},
-  { path: 'add-sensor/:id', component: NewSensorComponent, canActivate: [NurseGuard]},
+  { path: 'add-sensor/:id', component: NewSensorComponent},
   { path: 'login', component: LoginComponent},
   { path: 'admin', component: DoctorAdminComponent, canActivate: [SuperuserGuard]},
   { path: 'add-room/:hospitalid', component: AddRoomComponent, canActivate: [SuperuserGuard]},
