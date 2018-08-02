@@ -3,9 +3,12 @@
 # compiled output
 /dist
 /tmp
+/app/**/*.js
+/app/**/*.js.map
 
 # dependencies
 /node_modules
+/bower_components
 
 # IDEs and editors
 /.idea
@@ -39,3 +42,9 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
