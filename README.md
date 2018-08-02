@@ -1,4 +1,14 @@
 # HealthStation dashboard
+A serverless solution for monitoring health.
+
+- Raspberry Pi records data from connected **Bluetooth** sensors
+- Patients are identified using an **RFID** scanner
+- Measurements are stored in a no-SQL real-time **Firebase** database
+- Health stats are displayed on a configurable dashboard, written in **Angular**
+
+(click to see demo on YouTube)
+[![Testing](screenshots/yt-demo.png)](https://youtu.be/KNPxM7up9dE)
+
 To run the project, please install [Angular CLI](https://github.com/angular/angular-cli) using `npm install -g @angular/cli`
 
 ## Development server
